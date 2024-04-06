@@ -12,9 +12,6 @@ class Todo {
 }
 
 module.exports = {
-  findAll: () => {
-    return todos.slice();
-  },
   create: ({ title, body }) => {
     if (!title) {
       throw new Error("titleは必須です");
