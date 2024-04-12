@@ -1,16 +1,19 @@
-import { Request, Response } from "express";
-const Todo = require("../models/Todo");
+import type { Request, Response } from 'express'
+import { create } from '../models/Todo'
+import type { TodoInput } from '../models/Todo'
 
-module.exports = {
-  postTodo: (req: Request, res: Response) => {
-    try {
-      const { title, body } = req.body;
-      const createdTodo = Todo.create({ title, body });
+export const postTodo = (req: Request<any, any, TodoInput>, res: Response) => {
+  try {
+    const { title, body } = req.body
+    const createdTodo = create({ title, body })
 
-      res.status(200).json(createdTodo);
-    } catch (error: unknown) {
-      const { error } = Todo.create();
-      res.status(400).json({ message: error.message });
+    res.status(200).json(createdTodo)
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message })
+      return
     }
-  },
-};
+
+    res.status(400).json({ message: error })
+  }
+}

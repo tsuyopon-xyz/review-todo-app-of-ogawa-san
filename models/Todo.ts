@@ -1,41 +1,38 @@
-const todos = [];
+const db: Todo[] = []
 
-let nextId: number = 1;
-interface TodoElemet {
-  title: string;
-  body: string;
+let nextId: number = 1
+
+export interface TodoInput {
+  title: string
+  body: string
 }
-export class Todo {
-  private readonly id: number;
-  private readonly title: string;
-  private readonly body: string;
-  private readonly createdAt: Date;
-  private readonly updatedAt: Date;
 
-  constructor({ title, body }: TodoElemet) {
-    this.id = nextId++;
-    this.title = title;
-    this.body = body;
-    this.createdAt = new Date();
-    this.updatedAt = new Date();
+class Todo {
+  public readonly id: number
+  public readonly title: string
+  public readonly body: string
+  public readonly createdAt: Date
+  public readonly updatedAt: Date
+
+  constructor({ title, body }: TodoInput) {
+    if (!title) {
+      throw new Error('titleは1文字以上の文字列で必須です')
+    }
+    if (!body) {
+      throw new Error('bodyは1文字以上の文字列で必須です')
+    }
+
+    this.id = nextId++
+    this.title = title
+    this.body = body
+    this.createdAt = new Date()
+    this.updatedAt = new Date()
   }
 }
 
-module.exports = {
-  create: ({ title, body }: TodoElemet) => {
-    if (!title) {
-      throw new Error("titleは必須です");
-    }
-    if (!body) {
-      throw new Error("bodyは必須です");
-    }
+export const create = ({ title, body }: TodoInput) => {
+  const todo = new Todo({ title, body })
+  db.push(todo)
 
-    const todo = new Todo({
-      title: title,
-      body: body,
-    });
-    todos.push(todo);
-
-    return todo;
-  },
-};
+  return todo
+}
