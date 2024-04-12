@@ -1,7 +1,7 @@
 const Todo = require("../models/Todo");
 
 module.exports = {
-  postTodo: (req, res) => {
+  postTodo: (req: Request, res: Response) => {
     try {
       const { title, body } = req.body;
       const createdTodo = Todo.create({ title, body });

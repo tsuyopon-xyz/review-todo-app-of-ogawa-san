@@ -1,8 +1,18 @@
 const todos = [];
-let nextId = 1;
 
-class Todo {
-  constructor({ title, body }) {
+let nextId: number = 1;
+interface TodoElemet {
+  title: string;
+  body: string;
+}
+export class Todo {
+  private readonly id: number;
+  private readonly title: string;
+  private readonly body: string;
+  private readonly createdAt: Date;
+  private readonly updatedAt: Date;
+
+  constructor({ title, body }: TodoElemet) {
     this.id = nextId++;
     this.title = title;
     this.body = body;
@@ -12,7 +22,7 @@ class Todo {
 }
 
 module.exports = {
-  create: ({ title, body }) => {
+  create: ({ title, body }: TodoElemet) => {
     if (!title) {
       throw new Error("titleは必須です");
     }
