@@ -1,7 +1,7 @@
 const todos = [];
 
 let nextId: number = 1;
-interface TodoElemet {
+export interface TodoInput {
   title: string;
   body: string;
 }
@@ -12,7 +12,14 @@ export class Todo {
   private readonly createdAt: Date;
   private readonly updatedAt: Date;
 
-  constructor({ title, body }: TodoElemet) {
+  constructor({ title, body }: TodoInput) {
+    if (!title) {
+      throw new Error("titleは必須です");
+    }
+    if (!body) {
+      throw new Error("bodyは必須です");
+    }
+
     this.id = nextId++;
     this.title = title;
     this.body = body;
@@ -21,21 +28,12 @@ export class Todo {
   }
 }
 
-module.exports = {
-  create: ({ title, body }: TodoElemet) => {
-    if (!title) {
-      throw new Error("titleは必須です");
-    }
-    if (!body) {
-      throw new Error("bodyは必須です");
-    }
+export const create = ({ title, body }: TodoInput) => {
+  const todo = new Todo({
+    title: title,
+    body: body,
+  });
+  todos.push(todo);
 
-    const todo = new Todo({
-      title: title,
-      body: body,
-    });
-    todos.push(todo);
-
-    return todo;
-  },
+  return todo;
 };
