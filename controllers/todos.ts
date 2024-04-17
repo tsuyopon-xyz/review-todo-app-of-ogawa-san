@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import { TodoInput } from "../models/Todo";
 import { create } from "../models/Todo";
 

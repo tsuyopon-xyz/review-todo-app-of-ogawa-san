@@ -5,7 +5,7 @@ export interface TodoInput {
   title: string;
   body: string;
 }
-export class Todo {
+class Todo {
   public readonly id: number;
   private readonly title: string;
   private readonly body: string;
