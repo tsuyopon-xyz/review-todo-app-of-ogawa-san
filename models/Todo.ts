@@ -7,8 +7,8 @@ export interface TodoInput {
 }
 class Todo {
   public readonly id: number;
-  private readonly title: string;
-  private readonly body: string;
+  public readonly title: string;
+  public readonly body: string;
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
 
