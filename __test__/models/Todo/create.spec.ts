@@ -6,12 +6,7 @@ describe("createメソッドのテスト", () => {
       title: "",
       body: "詳細文",
     };
-    try {
-      create(data);
-      fail();
-    } catch (error) {
-      expect(() => create(data)).toThrow("titleの内容は必須です");
-    }
+    expect(() => create(data)).toThrow("titleの内容は必須です");
   });
 
   it("メソッド実行時、bodyプロパティの値が入力されていないとエラーになる。", () => {
@@ -19,12 +14,7 @@ describe("createメソッドのテスト", () => {
       title: "詳細文",
       body: "",
     };
-    try {
-      create(data);
-      fail();
-    } catch (error) {
-      expect(() => create(data)).toThrow("bodyの内容は必須です");
-    }
+    expect(() => create(data)).toThrow("bodyの内容は必須です");
   });
 
   it("メソッド実行時、正しい引数を渡すと、新規にTodoデータを作成し、Todo配列にデータを追加する", () => {
