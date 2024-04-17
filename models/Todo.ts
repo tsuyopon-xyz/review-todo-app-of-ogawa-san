@@ -6,18 +6,18 @@ export interface TodoInput {
   body: string;
 }
 export class Todo {
-  private readonly id: number;
+  public readonly id: number;
   private readonly title: string;
   private readonly body: string;
-  private readonly createdAt: Date;
-  private readonly updatedAt: Date;
+  public readonly createdAt: Date;
+  public readonly updatedAt: Date;
 
   constructor({ title, body }: TodoInput) {
     if (!title) {
-      throw new Error("titleは必須です");
+      throw new Error("titleの内容は必須です");
     }
     if (!body) {
-      throw new Error("bodyは必須です");
+      throw new Error("bodyの内容は必須です");
     }
 
     this.id = nextId++;
